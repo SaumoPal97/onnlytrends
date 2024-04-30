@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Backend API
+  description: Backend API
+  version: "1.0"
+paths:
+  /reports:
+    get:
+      summary: Get Reports
+      responses:
+        '200':
+          description: A list of reports
+  /trends:
+    get:
+      summary: Get Trends
+      responses:
+        '200':
+          description: A list of trends
+  /users:
+    get:
+      summary: Get a list of users
+      responses:
+        '200':
+          description: Details of an appointment
+    post:
+      summary: Add a user
+      responses:
+        '200':
+          description: The user was successfully added

@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: BFF API
+  description: BFF API
+  version: "1.0"
+paths:
+  /reports:
+    get:
+      summary: Get Reports
+      responses:
+        '200':
+          description: A list of reports
+  /chat/{namespace}:
+    post:
+      summary: Perform chat
+      parameters:
+        - in: path
+          name: namespace
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of trends
+  /users:
+    post:
+      summary: Add a user
+      responses:
+        '200':
+          description: The user was successfully added

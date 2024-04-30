@@ -27,9 +27,9 @@ const authenticate = async (tokenUrl, clientId, clientSecret) => {
 };
 
 const getAccessToken = async () => {
-  const tokenUrl = process.env.APPOINTMENTS_OAUTH_TOKEN_URL;
-  const clientId = process.env.APPOINTMENTS_OAUTH_CLIENT_ID;
-  const clientSecret = process.env.APPOINTMENTS_OAUTH_CLIENT_SECRET;
+  const tokenUrl = process.env.BACKEND_OAUTH_TOKEN_URL;
+  const clientId = process.env.BACKEND_OAUTH_CLIENT_ID;
+  const clientSecret = process.env.BACKEND_OAUTH_CLIENT_SECRET;
 
   try {
     const accessToken = await authenticate(tokenUrl, clientId, clientSecret);
