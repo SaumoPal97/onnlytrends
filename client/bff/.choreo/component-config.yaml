@@ -10,8 +10,8 @@ spec:
       schemaFilePath: openapi.yaml
   outbound:
     serviceReferences:
-    - name: choreo:///codechallenge/appointment-management/cmrqnc/8b1c3/v1.0/ORGANIZATION
-      connectionConfig: 01eef67c-b6e6-17c0-9120-68782ddbb0c9
+    - name: choreo:///saumohackathon/backend/plvhsm/197f7/v1/ORGANIZATION
+      connectionConfig: 01ef0719-60b7-1a68-a468-7645b1c36f65
       env:
       - from: ServiceURL
         to: BACKEND_SERVICE_URL
