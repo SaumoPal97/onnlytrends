@@ -1,6 +1,8 @@
+import Cookies from "js-cookie";
+
 export const isAuthenticated = () => {
   return (
-    localStorage.getItem("access_token") !== undefined &&
-    localStorage.getItem("access_token") !== null
+    localStorage.getItem("userDetails") !== undefined &&
+    Cookies.get("userinfo") !== null
   );
 };
