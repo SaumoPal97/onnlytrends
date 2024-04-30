@@ -1,11 +1,14 @@
 require("dotenv").config;
 const express = require("express");
+const db = require("../services/db");
+
 const router = express.Router();
+const prisma = db.getClient();
 
 router.get("/", async (req, res) => {
   // get all users
   const users = await prisma.user.findMany();
-  return users;
+  res.send({ data: users });
 });
 
 router.post("/", async (req, res) => {
@@ -24,7 +27,7 @@ router.post("/", async (req, res) => {
     },
   });
 
-  return user;
+  res.send({ data: [user] });
 });
 
 module.exports = router;

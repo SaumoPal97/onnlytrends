@@ -17,12 +17,12 @@ router.get("/:id?", async (req, res) => {
         trends: true,
       },
     });
-    return [report];
+    res.send({ data: [report] });
   } else {
     const tags = req.query.tags;
     if (tags) {
       // get reports by tag
-      const reports = await prisma.report.findAll({
+      const reports = await prisma.report.findMany({
         where: {
           tags: { hasSome: tags.split(",") },
         },
@@ -30,7 +30,7 @@ router.get("/:id?", async (req, res) => {
           trends: true,
         },
       });
-      return reports;
+      res.send({ data: reports });
     } else {
       // get all reports
       const reports = await prisma.report.findMany({
@@ -38,7 +38,7 @@ router.get("/:id?", async (req, res) => {
           trends: true,
         },
       });
-      return reports;
+      res.send({ data: reports });
     }
   }
 });

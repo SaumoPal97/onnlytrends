@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useEffect, useRef } from "react";
+import { API_URL } from "@/utils/apiUtils";
+import { v4 as uuidv4 } from "uuid";
 
 const ChatPage = ({ title = null, namespace = null }) => {
   const containerRef = useRef(null);
@@ -24,10 +26,32 @@ const ChatPage = ({ title = null, namespace = null }) => {
     setIsLoading(true);
     setMessages((prevState) => [
       ...prevState,
-      { role: "user", id: "dassdadas", content: input },
+      ...[{ role: "user", id: uuidv4(), content: input }],
     ]);
-    // call api
+    console.log("presend messages", messages, input);
+    const response = await fetch(
+      `${API_URL}/chat${namespace ? `/${namespace}` : ""}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            ...messages,
+            { role: "user", id: uuidv4(), content: input },
+          ],
+        }),
+      }
+    );
+    const res = await response.json();
+    setMessages((prevState) => [
+      ...prevState,
+      { role: "assistant", id: uuidv4(), content: res.data.message },
+    ]);
+    setData(res.data.sources);
     setIsLoading(false);
+    setInput("");
   };
 
   useEffect(() => {
@@ -41,7 +65,7 @@ const ChatPage = ({ title = null, namespace = null }) => {
       {isAuthenticated() ? (
         <div className="rounded-2xl border min-h-full max-h-full w-full flex flex-col justify-between pt-10">
           <div className="p-6 overflow-auto" ref={containerRef}>
-            {messages.map(({ id, role, content }, index) => (
+            {(messages || []).map(({ id, role, content }, index) => (
               <ChatLine
                 key={id}
                 role={role}

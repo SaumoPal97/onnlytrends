@@ -42,34 +42,49 @@ const getAccessToken = async () => {
 
 class BackendConnector {
   async get(path, queryParams = null) {
-    const accessToken = await getAccessToken();
+    console.log(process.env.BACKEND_SERVICE_URL);
     const backendServiceUrl = process.env.BACKEND_SERVICE_URL;
-
-    const response = await axios.get(
-      `${backendServiceUrl}/${path}${queryParams ? `?${queryParams}` : ``}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    return response;
+    if (process.env.NODE_ENV === "production") {
+      const accessToken = await getAccessToken();
+      const response = await axios.get(
+        `${backendServiceUrl}${path}${queryParams ? `?${queryParams}` : ``}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response;
+    } else {
+      const response = await axios.get(
+        `${backendServiceUrl}${path}${queryParams ? `?${queryParams}` : ``}`
+      );
+      return response;
+    }
   }
 
   async post(path, body, queryParams = null) {
-    const accessToken = await getAccessToken();
     const backendServiceUrl = process.env.BACKEND_SERVICE_URL;
+    if (process.env.NODE_ENV === "production") {
+      const accessToken = await getAccessToken();
 
-    const response = await axios.post(
-      `${backendServiceUrl}/${path}${queryParams ? `?${queryParams}` : ``}`,
-      body,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    return response;
+      const response = await axios.post(
+        `${backendServiceUrl}${path}${queryParams ? `?${queryParams}` : ``}`,
+        body,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response;
+    } else {
+      const response = await axios.post(
+        `${backendServiceUrl}${path}${queryParams ? `?${queryParams}` : ``}`,
+        body
+      );
+      return response;
+    }
   }
 }
 

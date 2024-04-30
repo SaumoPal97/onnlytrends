@@ -3,94 +3,14 @@ import { API_URL } from "@/utils/apiUtils";
 import ReportCard from "@/components/ReportCard";
 
 const AllReports = () => {
-  const [contents, setContents] = useState([
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-    {
-      id: "pinterest",
-      title: "Pinterest Predicts 2024",
-      description:
-        "People use Pinterest to plan for the future, which means we can spot new trends before anyone else. Discover the top trends for 2024, from fashion to food and everything in between. You can use these trends to stay ahead of the curve—whether you’re trendsetting or trend-shopping.",
-      imageUrl: "/image.png",
-      tags: ["technology", "design", "fashion", "marketing"],
-    },
-  ]);
+  const [contents, setContents] = useState([]);
 
   useEffect(() => {
     const fetchContents = async () => {
       const response = await fetch(`${API_URL}/reports`);
+      const res = await response.json();
       setContents((prevState) => {
-        return [...prevState, response];
+        return [...prevState, ...res.data];
       });
     };
     fetchContents();

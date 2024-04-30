@@ -1,9 +1,9 @@
 require("dotenv").config;
 const express = require("express");
 
-const reportsRouter = require("./routes/reports");
-const trendsRouter = require("./routes/trends");
-const usersRouter = require("./routes/users");
+const reportsRouter = require("./routers/reports");
+const trendsRouter = require("./routers/trends");
+const usersRouter = require("./routers/users");
 
 const app = express();
 app.use(express.json());

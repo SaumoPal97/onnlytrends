@@ -9,7 +9,7 @@ router.get("/:id?", async (req, res) => {
   const isSent = req.query.isSent == "true" ? true : false;
   if (isSent) {
     // get trends by isSent
-    const trends = await prisma.trend.findAll({
+    const trends = await prisma.trend.findMany({
       where: {
         isSent,
       },
@@ -17,7 +17,7 @@ router.get("/:id?", async (req, res) => {
         report: true,
       },
     });
-    return trends;
+    res.send({ data: trends });
   } else {
     // get all trends
     const trends = await prisma.trend.findMany({
@@ -25,7 +25,7 @@ router.get("/:id?", async (req, res) => {
         report: true,
       },
     });
-    return trends;
+    res.send({ data: trends });
   }
 });
 
@@ -42,7 +42,7 @@ router.post("/update-many", async (req, res) => {
       isSent: true,
     },
   });
-  return updateTrends;
+  res.send({ data: updateTrends });
 });
 
 module.exports = router;

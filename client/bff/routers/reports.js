@@ -7,19 +7,22 @@ const router = express.Router();
 router.get("/:id?", async (req, res) => {
   const id = req.params.id;
   if (id) {
+    console.log("here1", id);
     // get report by id
     const response = await bc.get(`/reports/${id}`);
-    return [response];
+    res.send({ data: response.data.data });
   } else {
     const tags = req.query.tags;
+    console.log("here2", tags);
     if (tags) {
       // get reports by tag
       const response = await bc.get(`/reports`, `tags=${tags}`);
-      return response;
+      res.send({ data: response.data.data });
     } else {
       // get all reports
-      const response = await bc.get(`/reports`, `tags=${tags}`);
-      return response;
+      console.log("here3");
+      const response = await bc.get(`/reports`);
+      res.send({ data: response.data.data });
     }
   }
 });
