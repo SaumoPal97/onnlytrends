@@ -10,15 +10,7 @@ paths:
       responses:
         '200':
           description: A list of reports
-  /chat/{namespace}:
-    post:
-      summary: Perform chat
-      parameters:
-        - in: path
-          name: namespace
-          required: false
-          schema:
-            type: string
+  /chat:
       responses:
         '200':
           description: A list of trends
